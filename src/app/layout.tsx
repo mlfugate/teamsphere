@@ -24,15 +24,13 @@ export default function RootLayout({
         </Head>
         <body>
           <UserRedirect />
-
           <SignedOut>
             <SignInButton />
           </SignedOut>
-
           <SignedIn>
-            {children}
             <UserButton />
           </SignedIn>
+          {children}
         </body>
       </html>
     </ClerkProvider>
