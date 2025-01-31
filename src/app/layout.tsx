@@ -1,4 +1,3 @@
-"use client";
 import { metadata } from "./metadata";
 import Head from "next/head";
 import "./globals.css";
@@ -9,7 +8,6 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
-import UserRedirect from "./components/UserRedirect";
 
 export default function RootLayout({
   children,
@@ -24,7 +22,6 @@ export default function RootLayout({
           <meta name="description" content={metadata.description} />
         </Head>
         <body>
-          <UserRedirect />
           <SignedOut>
             <SignInButton />
           </SignedOut>
