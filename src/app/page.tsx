@@ -1,14 +1,13 @@
-"use client"; // Ensure this is at the top to make this file client-side
+"use client";
 
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client"; // Import Socket.IO client
-
-// Connect to the server
-const socket = io("http://localhost:3000"); // Replace with your server URL
+import { socket } from "../socket"; // Import socket from socket.js
 
 export default function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [transport, setTransport] = useState("N/A");
+  const [messages, setMessages] = useState<string[]>([]);
+  const [newMessage, setNewMessage] = useState<string>("");
 
   useEffect(() => {
     if (socket.connected) {
@@ -33,6 +32,9 @@ export default function Home() {
     // Listen for connection and disconnection events
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
+    socket.on("message", (message: string) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
 
     return () => {
       socket.off("connect", onConnect);
@@ -40,11 +42,33 @@ export default function Home() {
     };
   }, []);
 
+  const handleSendMessage = () => {
+    //Emit the message to the server
+    socket.emit("send_message", newMessage);
+    setNewMessage(""); //Clear the input field
+  };
+
   return (
     <div>
       <h1>TeamSphere</h1>
       <p>Status: {isConnected ? "connected" : "disconnected"}</p>
       <p>Transport: {transport}</p>
+
+      {/* Display messages  */}
+      <div>
+        {messages.map((message, index) => (
+          <div key={index}>{message}</div>
+        ))}
+
+        {/* Input field for messages */}
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Type a message..."
+        />
+        <button onClick={handleSendMessage}>Send</button>
+      </div>
     </div>
   );
 }
