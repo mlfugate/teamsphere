@@ -1,5 +1,6 @@
 "use client";
-
+import "./globals.css";
+import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import { socket } from "../socket"; // Import socket from socket.js
 
@@ -49,26 +50,28 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <h1>TeamSphere</h1>
-      <p>Status: {isConnected ? "connected" : "disconnected"}</p>
-      <p>Transport: {transport}</p>
+    <div className={styles.page}>
+      <main className={styles.main}>
+        <h1>TeamSphere</h1>
+        <p>Status: {isConnected ? "connected" : "disconnected"}</p>
+        <p>Transport: {transport}</p>
 
-      {/* Display messages  */}
-      <div>
-        {messages.map((message, index) => (
-          <div key={index}>{message}</div>
-        ))}
+        {/* Display messages  */}
+        <div>
+          {messages.map((message, index) => (
+            <div key={index}>{message}</div>
+          ))}
 
-        {/* Input field for messages */}
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Type a message..."
-        />
-        <button onClick={handleSendMessage}>Send</button>
-      </div>
+          {/* Input field for messages */}
+          <input
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type a message..."
+          />
+          <button onClick={handleSendMessage}>Send</button>
+        </div>
+      </main>
     </div>
   );
 }
