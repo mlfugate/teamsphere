@@ -1,4 +1,3 @@
-"use client";
 import { metadata } from "./metadata";
 import Head from "next/head";
 import "./globals.css";
