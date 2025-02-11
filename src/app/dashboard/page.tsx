@@ -1,6 +1,7 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Dashboard() {
+  console.log("userid dashboard Draft PR commit");
   return (
     <div>
       <SignedOut>
