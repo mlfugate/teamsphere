@@ -18,7 +18,6 @@ export default function ChatChannel() {
   const roomId = "General Room";
   useEffect(() => {
     fetch("/api/rooms")
-      // fetch("http://localhost:5001/rooms")
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched initial messages", data);
@@ -48,24 +47,9 @@ export default function ChatChannel() {
     }
 
     function handleMessageObject(msg: unknown) {
-      //   let messageObj: Message;
-      //   if (typeof msg === "string") {
-      //     messageObj = { sender: user?.firstName || "unknown", text: msg };
-      //     console.log(messageObj);
-      //   } else {
-      //     messageObj = msg as Message;
-      //   }
-      //   setMessages((prevMessages) => [...prevMessages, messageObj]);
       const messageObj = msg as Message;
       setMessages((prevMessages) => [...prevMessages, messageObj]);
     }
-    // return () => {
-    //   socket.on("connect", onConnect);
-    //   socket.on("disconnect", onDisconnect);
-    //   socket.on("message", (message: string) => {
-    //     setMessages((prevMessages) => [...prevMessages, message]);
-    //   });
-    // };
 
     //register event listeners
     socket.on("connect", onConnect);
@@ -97,8 +81,6 @@ export default function ChatChannel() {
     };
 
     // Emit the message object to the server
-    // socket.emit("send_message", messageData);
-
     socket.emit("send_message", messageData);
     setNewMessage("");
   };
@@ -115,7 +97,6 @@ export default function ChatChannel() {
         }}
       >
         <h2>Welcome, {user?.firstName}</h2>
-        {/* <p>Your User ID {user?.id}</p> */}
       </div>
       {/* Room Id Input >>>>>  */}
       <input
