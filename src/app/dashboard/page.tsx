@@ -1,4 +1,7 @@
+"use client";
+
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import ChatChannel from "../components/ChatChannel";
 
 export default function Dashboard() {
   return (
@@ -10,6 +13,7 @@ export default function Dashboard() {
       <SignedIn>
         <h1>Welcome to your dashboard</h1>
         <p>You are Signed In!</p>
+        <ChatChannel />
       </SignedIn>
     </div>
   );

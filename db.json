@@ -1,0 +1,19 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "name": "General Room",
+      "messages": [
+        {
+          "sender": "user_1",
+          "text": "Welcome! I'm coming from db.json!"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Random",
+      "messages": []
+    }
+  ]
+}
